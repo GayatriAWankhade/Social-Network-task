@@ -10,12 +10,15 @@ import RegisterForm from './components/auth/RegisterForm';
 import FeedPage from './components/posts/FeedPage';
 import ProfilePage from './components/profile/ProfilePage';
 import ChatPage from './components/chat/ChatPage';
-import Loading from './components/ui/Loading';
+import { Loading } from './components/ui/Loading';
+import { Outlet } from 'react-router-dom';
 
 const AppContent: React.FC = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (isLoading) {
+  if (!isAuthenticated) {
+  return <Loading />;
+}
     return <Loading />;
   }
 
@@ -29,7 +32,7 @@ const AppContent: React.FC = () => {
             <Route path="*" element={<Navigate to="/login" replace />} />
           </>
         ) : (
-          <Route path="/" element={<AppLayout />}>
+          <Route path="/" element={<AppLayout><Outlet /></AppLayout>}>
             <Route index element={<Navigate to="/feed" replace />} />
             <Route path="/feed" element={<FeedPage />} />
             <Route path="/profile/me" element={<ProfilePage />} />

@@ -1,39 +1,20 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import { Loading } from '../ui/Loading';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { Navigate } from 'react-router-dom';
 
 interface AuthGuardProps {
   children: React.ReactNode;
 }
 
-export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuth();
-  const location = useLocation();
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loading size="lg" text="Loading..." />
-      </div>
-    );
-  }
+const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;
 };
 
-// src/components/layout/ProtectedRoute.tsx
-import React from 'react';
-import { AuthGuard } from '../auth/AuthGuard';
-
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  return <AuthGuard>{children}</AuthGuard>;
-};
+export default AuthGuard;

@@ -1,25 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authSlice from './authSlice';
-import postsSlice from './postsSlice';
-import chatSlice from './chatSlice';
-import notificationsSlice from './notificationsSlice';
-import uiSlice from './uiSlice';
+import authReducer from './authSlice';
+import postsReducer from './postsSlice';
+import chatReducer from './chatSlice';
+import notificationsReducer from './notificationsSlice';
+import uiReducer from './uiSlice';
 
 export const store = configureStore({
   reducer: {
-    auth: authSlice,
-    posts: postsSlice,
-    chat: chatSlice,
-    notifications: notificationsSlice,
-    ui: uiSlice,
+    auth: authReducer,
+    posts: postsReducer,
+    chat: chatReducer,
+    notifications: notificationsReducer,
+    ui: uiReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['persist/PERSIST'],
-      },
-    }),
 });
 
+// Types for useSelector/useDispatch
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
