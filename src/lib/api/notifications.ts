@@ -1,5 +1,7 @@
 import client from './client';
 import { Notification } from '../../types/notification';
+import { fetchNotifications } from '../../store/notificationsSlice'; 
+
 
 export const fetchNotificationsAPI = async (): Promise<Notification[]> => {
   const response = await client.get('/notifications');
