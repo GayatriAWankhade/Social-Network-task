@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { fetchComments, createComment } from '../../lib/api/posts';
-// import { Comment } from '../../types/post';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 
@@ -31,7 +30,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
     if (!newComment.trim()) return;
     setPosting(true);
     try {
-      const comment = await createComment(postId, { content: newComment });
+      const comment = await createComment(postId, newComment);
       setComments((prev) => [...prev, comment]);
       setNewComment('');
     } finally {

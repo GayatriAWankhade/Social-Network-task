@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { sendMessage } from '../../store/chatSlice'; // assume thunk for sending message
+import { useAppDispatch } from '../../store';
+import { sendMessage } from '../../store/chatSlice'; 
 
 interface MessageInputProps {
   threadId: string;
@@ -8,7 +8,7 @@ interface MessageInputProps {
 
 const MessageInput: React.FC<MessageInputProps> = ({ threadId }) => {
   const [text, setText] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSend = () => {
     if (text.trim() === '') return;

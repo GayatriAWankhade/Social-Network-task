@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/authSlice'; // Assuming thunk exists
+import { useAppDispatch } from '../../store';
+import { registerUser } from '../../store/authSlice'; 
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 
 const RegisterForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,10 +25,13 @@ const RegisterForm: React.FC = () => {
       await dispatch(registerUser({ name, email, password })).unwrap();
       // redirect or show success handled outside
     } catch (err: any) {
-      setError(err.message || 'Failed to register');
-    } finally {
-      setLoading(false);
-    }
+  console.error(err);
+  if (err.response && err.response.status === 404) {
+    setError("Registration API is not available. Please try again later.");
+  } else {
+    setError(err.message || 'Failed to register');
+  }
+}
   };
 
   return (
@@ -71,3 +74,4 @@ const RegisterForm: React.FC = () => {
 };
 
 export default RegisterForm;
+

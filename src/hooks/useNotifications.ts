@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Notification } from '../types/notification';
-import { fetchNotifications } from '../lib/api/notifications';
+import { fetchNotificationsAPI as fetchNotifications } from '../lib/api/notifications';
+
 
 export const useNotifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);

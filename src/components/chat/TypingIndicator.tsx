@@ -9,7 +9,7 @@ const TypingIndicator: React.FC<TypingIndicatorProps> = ({ threadId }) => {
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    // Here you would subscribe to typing events from socket or API
+    
     // Simulate typing indicator for demo
     const timer = setTimeout(() => setIsTyping(false), 3000);
     // Cleanup

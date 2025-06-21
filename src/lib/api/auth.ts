@@ -16,7 +16,13 @@ export const login = async (payload: LoginPayload) => {
   return response.data;
 };
 
+// export const register = async (payload: RegisterPayload) => {
+//   const response = await client.post('/auth/register', payload);
+//   return response.data;
+// };
+
 export const register = async (payload: RegisterPayload) => {
+  console.log('Registering at:', process.env.REACT_APP_API_URL + '/auth/register');
   const response = await client.post('/auth/register', payload);
   return response.data;
 };

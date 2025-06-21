@@ -1,54 +1,3 @@
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { User } from '../types/user';
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
-
-
-// interface AuthState {
-//   user: User | null;
-//   token: string | null;
-// }
-
-// const initialState: AuthState = {
-//   user: null,
-//   token: null,
-// };
-
-// export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
-//   const res = await axios.post('/api/login', credentials);
-//   return res.data;
-// });
-
-// export const registerUser = createAsyncThunk('auth/registerUser', async (userData) => {
-//   const res = await axios.post('/api/register', userData);
-//   return res.data;
-// });
-
-// export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
-//   await axios.post('/api/logout');
-// });
-
-// const authSlice = createSlice({
-//   name: 'auth',
-//   initialState,
-//   reducers: {
-//     setUser(state, action: PayloadAction<User>) {
-//       state.user = action.payload;
-//     },
-//     setToken(state, action: PayloadAction<string>) {
-//       state.token = action.payload;
-//     },
-//     logout(state) {
-//       state.user = null;
-//       state.token = null;
-//     },
-//   },
-// });
-
-// export const { setUser, setToken, logout } = authSlice.actions;
-// export default authSlice.reducer;
-
-
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { User } from '../types/user';
@@ -73,11 +22,24 @@ export const loginUser = createAsyncThunk<User, { email: string; password: strin
   }
 );
 
-export const registerUser = createAsyncThunk<User, { name: string; email: string; password: string }>(
-  'auth/register',
-  async (userData) => {
-    const res = await axios.post('/api/register', userData);
-    return res.data;
+// export const registerUser = createAsyncThunk<User, { name: string; email: string; password: string }>(
+//   'auth/register',
+//   async (userData) => {
+//     const res = await axios.post('/api/register', userData);
+//     return res.data;
+//   }
+// );
+export const registerUser = createAsyncThunk(
+  'auth/registerUser',
+  async (payload: { name: string; email: string; password: string }) => {
+    //Simulate a fake response instead of hitting real backend
+    await new Promise((res) => setTimeout(res, 1000)); // simulate delay
+    return {
+      id: Date.now().toString(),
+      name: payload.name,
+      email: payload.email,
+      token: 'fake-jwt-token',
+    };
   }
 );
 
@@ -91,7 +53,11 @@ export const logoutUser = createAsyncThunk<void, void>(
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<User | null>) => {
+      state.user = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => { state.loading = true; })
@@ -104,4 +70,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;

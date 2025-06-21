@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NotificationItem from './NotificationItem';
-import { fetchNotifications } from '../../lib/api/notifications';
+import { fetchNotificationsAPI as fetchNotifications } from '../../lib/api/notifications';
 import { Notification } from '../../types/notification';
 
 const NotificationCenter: React.FC = () => {

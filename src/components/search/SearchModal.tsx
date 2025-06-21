@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../ui/Modal';
 import SearchResults from './SearchResults';
-import { searchUsers } from '../../lib/api/users';
+import { searchUsersAPI as searchUsers } from '../../lib/api/users';
 
 interface SearchModalProps {
   isOpen: boolean;

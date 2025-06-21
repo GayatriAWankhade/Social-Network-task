@@ -1,26 +1,3 @@
-// import React from 'react';
-// import { Button } from '../ui/Button';
-
-// interface FollowRequestItemProps {
-//   username: string;
-//   onAccept: () => void;
-//   onReject: () => void;
-// }
-
-// const FollowRequestItem: React.FC<FollowRequestItemProps> = ({ username, onAccept, onReject }) => {
-//   return (
-//     <div className="flex items-center justify-between p-2 border-b">
-//       <span>{username} wants to follow you</span>
-//       <div className="space-x-2">
-//         <Button onClick={onAccept}>Accept</Button>
-//         <Button onClick={onReject} variant="outline">Reject</Button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FollowRequestItem;
-
 import React, { useState } from 'react';
 import { Notification } from '../../types/notification';
 import { acceptFollowRequest, rejectFollowRequest } from '../../lib/api/notifications';

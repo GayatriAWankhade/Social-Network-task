@@ -6,5 +6,5 @@ export interface Notification {
   message: string;
   read: boolean;
   createdAt: string;
-  relatedUserId?: string;  // e.g. user who triggered notification
+  relatedUserId?: string;  
 }

@@ -26,7 +26,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({ onClose, onPostCreate
     setLoading(true);
     setError(null);
     try {
-      const newPost = await createPost({ content, mediaFile });
+      const newPost = await createPost(content);
       onPostCreated(newPost);
       onClose();
     } catch (err: any) {
@@ -37,7 +37,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({ onClose, onPostCreate
   };
 
   return (
-    <Modal onClose={onClose} title="Create Post">
+    <Modal isOpen={true} onClose={onClose} title="Create Post">
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && <p className="text-red-600">{error}</p>}
         <textarea
