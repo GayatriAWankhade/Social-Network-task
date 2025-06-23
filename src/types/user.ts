@@ -8,5 +8,6 @@ export interface User {
   isFollowing?: boolean;
   followersCount?: number;
   followingCount?: number;
+  profilePicture?: string;
 }
 

@@ -14,7 +14,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  return <>{children}</>;
+  return (
+    <div className="transition-all duration-300 ease-in-out">
+      {children}
+    </div>
+  );
 };
 
 export default ProtectedRoute;

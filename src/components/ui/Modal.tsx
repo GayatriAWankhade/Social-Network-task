@@ -29,21 +29,38 @@ export const Modal: React.FC<ModalProps> = ({
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child {...transitionProps.fadeOverlay}>
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
         </Transition.Child>
-        <div className="fixed inset-0 overflow-auto">
+
+        <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child {...transitionProps.fadePanel}>
-              <Dialog.Panel className={clsx('w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all', sizeClasses[size])}>
+              <Dialog.Panel
+                className={clsx(
+                  'w-full transform overflow-hidden rounded-2xl bg-white shadow-2xl transition-all',
+                  'border-0 ring-1 ring-gray-900/5',
+                  'dark:bg-gray-900 dark:ring-white/10',
+                  sizeClasses[size]
+                )}
+              >
                 {title && (
-                  <div className="flex items-center justify-between mb-4">
-                    <Dialog.Title className="text-lg font-medium text-gray-900">{title}</Dialog.Title>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
-                      <XMarkIcon className="h-6 w-6" />
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+                    <Dialog.Title className="text-lg font-semibold leading-6 text-gray-900 dark:text-white">
+                      {title}
+                    </Dialog.Title>
+                    <button
+                      type="button"
+                      className="rounded-full p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                      onClick={onClose}
+                    >
+                      <span className="sr-only">Close</span>
+                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                     </button>
                   </div>
                 )}
-                {children}
+                <div className="px-6 py-6">
+                  {children}
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -74,4 +91,3 @@ const transitionProps = {
     leaveTo: 'opacity-0 scale-95',
   },
 };
-

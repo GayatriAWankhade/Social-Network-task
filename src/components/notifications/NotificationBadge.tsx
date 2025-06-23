@@ -11,8 +11,8 @@ const NotificationBadge: React.FC = () => {
   if (count === 0) return null;
 
   return (
-    <span className="notification-badge inline-block bg-red-600 text-white text-xs rounded-full px-2 py-0.5">
-      {count}
+    <span className="notification-badge inline-flex items-center justify-center bg-red-500 text-white text-xs font-semibold rounded-full min-w-[20px] h-5 px-2 py-0.5 shadow-sm ring-2 ring-white animate-pulse">
+      {count > 99 ? '99+' : count}
     </span>
   );
 };
